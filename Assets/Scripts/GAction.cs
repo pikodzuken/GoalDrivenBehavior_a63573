@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public  abstract class GAction : MonoBehaviour
+public abstract class GAction : MonoBehaviour
 {
     public string actionName = "Action";
     public float cost = 1.0f;
@@ -17,7 +17,7 @@ public  abstract class GAction : MonoBehaviour
     public Dictionary<string, int> preconditions;
     public Dictionary<string, int> effects;
 
-    public WorldStates agentBeliets;
+    public WorldStates agentBeliefs;
 
     public bool running = false;
 
@@ -29,36 +29,42 @@ public  abstract class GAction : MonoBehaviour
 
     public void Awake()
     {
-        agent = this.GameObject.GetComponent<NavMeshAgentZ();
+        agent = this.gameObject.GetComponent<NavMeshAgent>();
 
-        if(preConditions != null)
-            foreah (WorldState w in preConditions);
+        if (preConditions != null)
+        {
+            foreach (WorldState w in preConditions)
             {
                 preconditions.Add(w.key, w.value);
             }
+        }
 
-         if(afterEffects != null)
-            foreah (WorldState w in afterEffects);
+        if (afterEffects != null)
+        {
+            foreach (WorldState w in afterEffects)
             {
                 effects.Add(w.key, w.value);
-            } 
+            }
+        }
     }
 
     public bool IsAchievable()
     {
         return true;
     }
-    
+
     public bool IsAchievableGiven(Dictionary<string, int> conditions)
     {
-        foreach(KeyValuePair<string, int> p in preconditions)
+        foreach (KeyValuePair<string, int> p in preconditions)
         {
-            if (!conditions.ContainsKey(p.Key))
+            if (!conditions.ContainsKey(p.Key) || conditions[p.Key] < p.Value)
+            {
                 return false;
+            }
         }
         return true;
     }
 
     public abstract bool PrePerform();
-    public abstract bool PostPerfom();
+    public abstract bool PostPerform();
 }
