@@ -32,13 +32,13 @@ public  abstract class GAction : MonoBehaviour
         agent = this.GameObject.GetComponent<NavMeshAgentZ();
 
         if(preConditions != null)
-            foreah (WorldState w in preConditions)
+            foreah (WorldState w in preConditions);
             {
                 preconditions.Add(w.key, w.value);
             }
 
          if(afterEffects != null)
-            foreah (WorldState w in afterEffects)
+            foreah (WorldState w in afterEffects);
             {
                 effects.Add(w.key, w.value);
             } 
@@ -54,7 +54,7 @@ public  abstract class GAction : MonoBehaviour
         foreach(KeyValuePair<string, int> p in preconditions)
         {
             if (!conditions.ContainsKey(p.Key))
-                    return false;
+                return false;
         }
         return true;
     }
