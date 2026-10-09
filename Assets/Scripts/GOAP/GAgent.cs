@@ -28,16 +28,19 @@ public class GAgent : MonoBehaviour
 
 
     // Start is called before the first frame update
-    public void Start()
+    protected virtual void Start()
     {
        GAction[] acts = this.GetComponents<GAction>();
        foreach (GAction a in acts)
+       {
             actions.Add(a); 
+       }
     }
 
 
     bool invoked = false;
-    void CompleteAction()
+
+    public void CompleteAction()
     {
         currentAction.running = false;
         currentAction.PostPerform();
@@ -48,12 +51,12 @@ public class GAgent : MonoBehaviour
     {
         if(currentAction != null && currentAction.running)
         {
-            float distanceToTarget = Vector3.Distance(currentAction.target.transform.position, this.transform.position);
-            if(currentAction.agent.hasPath && distanceToTarget < 2f)//currentAction.agent.remainingDistance < 0.5f)
+           // Check the agent has a goal and has reached that goal
+            if(currentAction.agent.hasPath && currentAction.agent.remainingDistance < 1.0f)
             {
-                Debug.Log("Distance to Goal: " + currentAction.agent.remainingDistance);
                 if (!invoked)
                 {
+                    //Debug.Log("Complete Invoke in: " + currentAction.duration);
                     Invoke("CompleteAction", currentAction.duration);
                     invoked = true;
                 }
