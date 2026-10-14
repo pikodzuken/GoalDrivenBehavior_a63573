@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class Nurse : GAgent
 {
-    // Start is called before the first frame update
+    SubGoal treatPatientGoal;
+
     void Start()
     {
         base.Start();
-        SubGoal s1 = new SubGoal("treatPatient", 1, true);
-        goals.Add(s1, 3);
+        treatPatientGoal = new SubGoal("treatPatient", 1, true);
+    }
+
+    void Update()
+    {
+        if (GWorld.Instance.HasPatients && !goals.ContainsKey(treatPatientGoal))
+        {
+            goals.Add(treatPatientGoal, 3);
+        }
     }
 
 }
