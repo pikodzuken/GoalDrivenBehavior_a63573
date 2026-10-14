@@ -12,6 +12,7 @@ public sealed class GWorld
     static GWorld()
     {
         world = new WorldStates();
+        patients = new  Queue<GameObject>();
         cubicles = new Queue<GameObject>();
 
         GameObject[] cubes = GameObject.FindGameObjectsWithTag("Cubicle");
@@ -20,6 +21,8 @@ public sealed class GWorld
 
         if(cubes.Length > 0)
             world.ModifyState("FreeCubicle", cubes.Length);
+
+        Time.timeScale = 5;
     }
 
     private GWorld()
