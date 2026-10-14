@@ -2727,6 +2727,7 @@ GameObject:
   - component: {fileID: 551985465}
   - component: {fileID: 551985466}
   - component: {fileID: 2873073193747980095}
+  - component: {fileID: 511146899}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -2888,12 +2889,37 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: 
-  duration: 0
+  duration: 5
   preConditions:
   - key: atHospital
     value: 0
   afterEffects:
   - key: isTreated
+    value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &511146899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7914ed654d3b7764da532789fabe7fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GoHome
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Home
+  duration: 0
+  preConditions:
+  - key: isCured
+    value: 0
+  afterEffects:
+  - key: isHome
     value: 0
   agent: {fileID: 0}
   running: 0
