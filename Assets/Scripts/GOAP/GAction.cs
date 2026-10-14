@@ -17,7 +17,7 @@ public abstract class GAction : MonoBehaviour
     public Dictionary<string, int> preconditions;
     public Dictionary<string, int> effects;
 
-    public WorldStates agentBeliefs;
+    public WorldStates beliefs;
 
     public GInventory inventory;
 
@@ -34,18 +34,22 @@ public abstract class GAction : MonoBehaviour
         agent = this.gameObject.GetComponent<NavMeshAgent>();
 
         if (preConditions != null)
+        {
             foreach (WorldState w in preConditions)
             {
                 preconditions.Add(w.key, w.value);
             }
+        }
 
         if (afterEffects != null)
+        {
             foreach (WorldState w in afterEffects)
             {
                 effects.Add(w.key, w.value);
             }
-
+        }
         inventory = this.GetComponent<GAgent>().inventory;
+        beliefs = this.GetComponent<GAgent>().beliefs;
     }
 
     public bool IsAchievable()
