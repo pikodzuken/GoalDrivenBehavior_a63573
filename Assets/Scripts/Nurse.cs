@@ -9,7 +9,8 @@ public class Nurse : GAgent
     void Start()
     {
         base.Start();
-        treatPatientGoal = new SubGoal("treatPatient", 1, true);
+        SubGoal s1 = new SubGoal("treatPatient", 1, false);
+        goals.Add(s1, 3);
     }
 
     void Update()
